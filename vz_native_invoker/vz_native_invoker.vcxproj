@@ -64,10 +64,12 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <UseDebugLibraries>true</UseDebugLibraries>
     <ConfigurationType>Makefile</ConfigurationType>
+    <RemoteRootDir>~/</RemoteRootDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <UseDebugLibraries>false</UseDebugLibraries>
     <ConfigurationType>Makefile</ConfigurationType>
+    <RemoteRootDir>~</RemoteRootDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM64'" Label="Configuration">
     <UseDebugLibraries>false</UseDebugLibraries>
@@ -82,7 +84,49 @@
   <ImportGroup Label="Shared" />
   <ImportGroup Label="PropertySheets" />
   <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <BuildCommandLine>
+    </BuildCommandLine>
+    <ReBuildCommandLine>
+    </ReBuildCommandLine>
+    <CleanCommandLine>
+    </CleanCommandLine>
+    <RemoteBuildCommandLine>make</RemoteBuildCommandLine>
+    <RemoteReBuildCommandLine>make clean &amp;&amp; make</RemoteReBuildCommandLine>
+    <RemoteCleanCommandLine>make clean</RemoteCleanCommandLine>
+    <RemoteBuildOutputs>/root/output.log</RemoteBuildOutputs>
+    <RemoteProjectDir>$(RemoteRootDir)/$(ProjectName)</RemoteProjectDir>
+    <SourcesToCopyRemotelyOverride>@(SourcesToCopyRemotely);@(DataFilesToCopyRemotely)</SourcesToCopyRemotelyOverride>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <RemoteBuildCommandLine>make</RemoteBuildCommandLine>
+    <RemoteReBuildCommandLine>make clean &amp;&amp; make</RemoteReBuildCommandLine>
+    <RemoteCleanCommandLine>make clean</RemoteCleanCommandLine>
+    <RemoteBuildOutputs>~/output.log</RemoteBuildOutputs>
+    <NMakeIncludeSearchPath>
+    </NMakeIncludeSearchPath>
+    <NMakeForcedIncludes>
+    </NMakeForcedIncludes>
+  </PropertyGroup>
   <ItemGroup>
+    <ClCompile Include="ActionBase.cpp" />
+    <ClCompile Include="ActionParser.cpp" />
+    <ClCompile Include="CloneVMAction.cpp" />
+    <ClCompile Include="DispatcherLoginHelper.cpp" />
+    <ClCompile Include="ResizeVMHddAction.cpp" />
+    <ClCompile Include="vz_helpers.cpp" />
+    <ClCompile Include="vz_native_invoker.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="ActionBase.h" />
+    <ClInclude Include="ActionParser.h" />
+    <ClInclude Include="CloneVMAction.h" />
+    <ClInclude Include="DispatcherLoginHelper.h" />
+    <ClInclude Include="ResizeVMHddAction.h" />
+    <ClInclude Include="vz_helpers.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Makefile" />
   </ItemGroup>
   <ItemDefinitionGroup />
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
