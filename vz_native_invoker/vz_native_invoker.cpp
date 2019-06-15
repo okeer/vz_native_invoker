@@ -6,6 +6,7 @@
 #include "CloneVMAction.h"
 #include "DispatcherLoginHelper.h"
 #include "ResizeVMHddAction.h"
+#include "RefreshConfigAction.h"
 
 using namespace std;
 using namespace boost;
@@ -22,9 +23,11 @@ int main(int ac, char* av[])
 
 		CloneVMAction cloneAction = CloneVMAction(&loginHelper);
 		ResizeVMHddAction resizeAction = ResizeVMHddAction(&loginHelper);
+		RefreshConfigAction refreshAction = RefreshConfigAction(&loginHelper);
 
 		newActionParser.RegisterAction(cloneAction);
 		newActionParser.RegisterAction(resizeAction);
+		newActionParser.RegisterAction(refreshAction);
 
 		newActionParser.Parse();
 	}

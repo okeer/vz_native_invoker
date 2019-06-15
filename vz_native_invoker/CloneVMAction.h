@@ -16,9 +16,9 @@ class CloneVMAction : public ActionBase
 	PRL_STR _template_name;
 
 protected:
-	virtual void isArgumentsValid(variables_map* vm) override;
+	virtual void isArgumentsValid(variables_map* vm);
 public:
 	CloneVMAction(DispatcherLoginHelper* loginHelper);
 
-	virtual void Run(variables_map vm) override;
+	virtual void Run(variables_map vm);
 };

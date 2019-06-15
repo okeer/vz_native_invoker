@@ -6,6 +6,7 @@ BASE = ActionBase
 CLONE = CloneVMAction
 LOGIN = DispatcherLoginHelper
 RESIZE = ResizeVMHddAction
+REFRESH = RefreshConfigAction
 
 # Target executable file name.
 # Here we are using the same name as the source file name.
@@ -17,12 +18,12 @@ SDK_PATH = /usr
 # Relative path to the SdkWrap directory containing
 # the SDK helper files. The files are used to load
 # the dynamic library.
-SDK_WRAP_PATH = /share/prlsdk/helpers/SdkWrap
+SDK_WRAP_PATH = /share/parallels-virtualization-sdk/helpers/SdkWrap
 
-OBJS = SdkWrap.o $(VZ_HELPERS).o $(LOGIN).o $(BASE).o $(PARSER).o $(CLONE).o $(RESIZE).o $(SOURCE).o
+OBJS = SdkWrap.o $(VZ_HELPERS).o $(LOGIN).o $(BASE).o $(PARSER).o $(CLONE).o $(RESIZE).o $(REFRESH).o $(SOURCE).o
 
-CXX = g++ -g -std=c++11
-CXXFLAGS = -DDYN_API_WRAP -I$(SDK_PATH)/include/prlsdk/ -I$(SDK_PATH)/$(SDK_WRAP_PATH)
+CXX = g++ -g -std=c++0x
+CXXFLAGS = -DDYN_API_WRAP -I$(SDK_PATH)/include/parallels-virtualization-sdk/ -I$(SDK_PATH)/$(SDK_WRAP_PATH)
 LDFLAGS = -ldl
 
 all : $(TARGET)
@@ -53,6 +54,9 @@ $(CLONE).o : $(CLONE).cpp
 
 $(RESIZE).o : $(RESIZE).cpp
 	$(CXX) -c -o $@ $(CXXFLAGS) $(RESIZE).cpp
+
+$(REFRESH).o : $(REFRESH).cpp
+	$(CXX) -c -o $@ $(CXXFLAGS) $(REFRESH).cpp
 
 
 clean:

@@ -22,8 +22,8 @@ void ActionParser::RegisterAction(ActionBase& action)
 void ActionParser::InitOptionMap()
 {
 	std::string s = "Select mode:";
-	for (ActionBase* a : actions)
-		s += " " + a->mode;
+	for (std::vector<ActionBase*>::iterator it = actions.begin(); it != actions.end(); ++it)
+		s += " " + (*it)->mode;
 
 	visible_desc_ptr->add_options()
 		("help,h", "Show this message")
@@ -45,15 +45,15 @@ void ActionParser::Parse()
 	bool fired = false;
 	InitOptionMap();
 
-	for (ActionBase* a : actions)
+	for (std::vector<ActionBase*>::iterator it = actions.begin(); it != actions.end(); ++it)
 	{
-		if (mode == a->mode)
+		if (mode == (*it)->mode)
 		{
 			fired = true;
-			work_desc_ptr->add(*(a->actionDesc));
+			work_desc_ptr->add(*((*it)->actionDesc));
 			store(parse_command_line(ac, av, *work_desc_ptr), vm);
-			a->Run(vm);
-			cout << "Action " << a->mode << " completed with success" << endl;
+			(*it)->Run(vm);
+			cout << "Action " << (*it)->mode << " completed with success" << endl;
 		}
 	}
 

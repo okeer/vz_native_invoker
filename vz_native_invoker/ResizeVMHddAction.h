@@ -15,10 +15,10 @@ class ResizeVMHddAction : public ActionBase
 	int _size;
 
 protected:
-	virtual void isArgumentsValid(variables_map* vm) override;
+	virtual void isArgumentsValid(variables_map* vm);
 
 public:
 	ResizeVMHddAction(DispatcherLoginHelper* loginHelper);
 
-	virtual void Run(variables_map vm) override;
+	virtual void Run(variables_map vm);
 };
