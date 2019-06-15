@@ -47,15 +47,11 @@ Resize VM HDD options (PrlVmDev_ResizeImage):
 
 `# yum install libprlsdk.x86_64`
 
-3. Create a symlink to the library - it does not exist by default, however SDK relies on it:
-
-`# ln -s /usr/lib64/libprl_sdk.so.7 /usr/lib64/libprl_sdk.so`
-
-4. Clone repo:
+3. Clone repo:
 
 `# git clone https://github.com/okeer/vz_native_invoker.git`
 
-5. Build the tool:
+4. Build the tool:
 
 `# cd vz_native_invoker`
 
