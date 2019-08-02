@@ -18,12 +18,20 @@ SDK_PATH = /usr
 # Relative path to the SdkWrap directory containing
 # the SDK helper files. The files are used to load
 # the dynamic library.
-SDK_WRAP_PATH = /share/parallels-virtualization-sdk/helpers/SdkWrap
+
+# Point to Virtuozzo 6 or 7 SDK directory
+ifneq (,$(wildcard /share/parallels-virtualization-sdk/helpers/SdkWrap))
+  SDK_FOLDER = parallels-virtualization-sdk
+else
+  SDK_FOLDER = prlsdk
+endif
+
+SDK_WRAP_PATH = /share/$(SDK_FOLDER)/helpers/SdkWrap
 
 OBJS = SdkWrap.o $(VZ_HELPERS).o $(LOGIN).o $(BASE).o $(PARSER).o $(CLONE).o $(RESIZE).o $(REFRESH).o $(SOURCE).o
 
 CXX = g++ -g -std=c++0x
-CXXFLAGS = -DDYN_API_WRAP -I$(SDK_PATH)/include/parallels-virtualization-sdk/ -I$(SDK_PATH)/$(SDK_WRAP_PATH)
+CXXFLAGS = -DDYN_API_WRAP -I$(SDK_PATH)/include/$(SDK_FOLDER)/ -I$(SDK_PATH)/$(SDK_WRAP_PATH)
 LDFLAGS = -ldl
 
 all : $(TARGET)
