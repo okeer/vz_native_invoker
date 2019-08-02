@@ -8,7 +8,6 @@ This tool is designed to play around with Virtuozzo/OpenVZ C++ API.
 
 ```
 # ./vz_native_invoker
-
 This tool invokes Virtuozzo native C++ API.
 
 Usage:
@@ -17,7 +16,7 @@ Usage:
 
 Options:
   -h [ --help ]         Show this message
-  -m [ --mode ] arg     Select mode: clone resize
+  -m [ --mode ] arg     Select mode: clone resize refresh
 
 
 Clone VM mode options (PrlVm_CloneEx):
@@ -28,6 +27,18 @@ Clone VM mode options (PrlVm_CloneEx):
 Resize VM HDD options (PrlVmDev_ResizeImage):
   -n [ --name ] arg     a name for the VM to resize
   -s [ --size ] arg     a new size for HDD
+
+
+Refresh VM options (PrlVm_RefreshConfig):
+  -n [ --name ] arg     a name for the VM to refresh config
+```
+
+Example:
+
+```
+# ./vz_native_invoker --mode refresh -n centos1
+Action refresh completed with success
+#
 ```
 
 # How to build on CentOS
@@ -43,7 +54,7 @@ Resize VM HDD options (PrlVmDev_ResizeImage):
 
 `# yum install boost-devel.x86_64`
 
-2. Install Virtuozzo SDK:
+2. Install Virtuozzo SDK (Virtuozzo 7, for PCS its parallels-virtualization-sdk):
 
 `# yum install libprlsdk.x86_64`
 
@@ -53,6 +64,4 @@ Resize VM HDD options (PrlVmDev_ResizeImage):
 
 4. Build the tool:
 
-`# cd vz_native_invoker`
-
-`# make`
+`# cd vz_native_invoker && make`
